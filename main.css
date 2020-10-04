@@ -1,0 +1,45 @@
+/* 全体を画面中央に寄せる */
+#main {
+  text-align: center;
+}
+
+/* 問題表示部分を調整する */
+#content {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+/* よみ の位置調整 */
+#yomi {
+  top: 40px;
+  position: relative;
+}
+
+/* 問題の調整 */
+#mondai {
+  display: flex;
+  justify-content: center;/* 子要素をflexboxにより中央に配置する */
+  font-size: 2.4rem;
+}
+
+/* 文字の行間を広げる */
+.text {
+  padding: 2px;
+}
+
+/* 文字色の調整 */
+.text.default {
+  color: #f3f3f3;
+  text-shadow: 1px 1px 0 #000,
+              -1px 1px 0 #000,
+              1px -1px 0 #000,
+             -1px -1px 0 #000;
+}
+
+/* 入力後は、黒色にする */
+.text.correct {
+  color: black;
+  text-shadow: none;
+}
