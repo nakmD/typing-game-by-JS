@@ -9,16 +9,20 @@ $(function() {
   const $countSelect = $('#count-select');
   const $correctMessage = $('#correct-message');
   const $mistakeMessage = $('#mistake-message');
+  const $timeMessage = $('#time-message');
+
   
   //問題用の変数の初期化
   let char_index = 1;
-  let max_length = 3;//TODO 最初の問題
+  let max_length = 3; //TODO 最初の問題
   let question_number = 1;
   let question_limit = 3;
   let done_questions = {};
   let typing_cnt = 0; //タイプした合計
   let correct_cnt = 0; //正解タイプ数
   let mistake_cnt = 0; //間違えたタイプ数
+  let start_game = false;
+  let start_time = 0;
   
   
   //問題
@@ -47,6 +51,14 @@ $(function() {
 
   $(document).on('keypress', function(e) {
     // console.log('key:' + e.key);
+    if(!start_game && e.keyCode === 32) {
+      start_game = true;
+      start_time = performance.now();
+      return;
+    } else if (!start_game) {
+      return;
+    }
+
     typing_cnt++;
 
     const $target = $('#char-' + char_index);
@@ -60,6 +72,7 @@ $(function() {
     } else {
       mistake_cnt++;
     }
+
 
     if(max_length < char_index) {
       question_number++; //次の問題の用意
@@ -89,6 +102,9 @@ $(function() {
     $mondai.hide();
     $correctMessage.text('正解数:' +correct_cnt+'/'+typing_cnt+'('+Math.floor(correct_cnt/typing_cnt * 100)+'%)');
     $mistakeMessage.text('間違い数:'+mistake_cnt+'/'+typing_cnt+'('+Math.floor(mistake_cnt/typing_cnt * 100)+'%)');
+    const end_time = performance.now();
+    const typing_time = ((end_time - start_time) / 1000).toFixed(2);
+    $timeMessage.text('かかった時間:' + typing_time + '秒');
     // alert('問題終了！');
   }
 
