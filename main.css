@@ -5,7 +5,7 @@
 
 /* 問題表示部分を調整する */
 #content {
-  border: 2px solid black;
+  border: 2px solid rgb(61, 158, 250);
   border-radius: 10px;
   width: 400px;
   margin: 0 auto;
@@ -48,7 +48,7 @@
   font-size: 1.0em;
   font-weight: bold;
   padding: 10px 30px;
-  background-color: #248;
+  background-color: rgb(61, 158, 250);
   color: #fff;
   border-style: none;
   cursor: pointer;

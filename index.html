@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="main.css">
-  <title>Document</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <title>タイピングゲーム</title>
 </head>
 <body>
   <div id="main">
-    <div><h2>タイピングゲーム</h2></div>
-    <div id="content">
-      <p id="start-message">「スペースキー」を押すとスタートします</p>
+    <div class="animate__animated animate__rubberBand"><h2>タイピングゲーム</h2></div>
+    <div id="content" class="animate__animated animate__flipInX">
+      <p id="start-message"><span style="color: rgb(255, 66, 66);">「スペースキー」</span>を押すとスタートします</p>
       <p id="yomi">よみ</p>
       <div id="mondai">
         <p id="char-1" class="text default">a</p>
