@@ -10,6 +10,7 @@ $(function() {
   const $correctMessage = $('#correct-message');
   const $mistakeMessage = $('#mistake-message');
   const $timeMessage = $('#time-message');
+  const $startMessage = $('#start-message');
 
   
   //問題用の変数の初期化
@@ -27,18 +28,20 @@ $(function() {
   
   //問題
   const MONDAI_LIST = [
-    {yomi:'ごはん', text:'gohan'},
-    {yomi:'おすし', text:'osushi'},
-    {yomi:'サイフ', text:'saifu'},
-    {yomi:'バナナ', text:'banana'},
-    {yomi:'くつした', text:'kutsushita'},
-    {yomi:'なべ', text:'nabe'},
-    {yomi:'あし', text:'ashi'},
+    {yomi:'さば', text:'saba'},
+    {yomi:'すき', text:'suki'},
+    {yomi:'ないてい', text:'naitei'},
+    {yomi:'ホワイトニング', text:'howaitoninngu'},
+    {yomi:'ほしい', text:'hoshi'},
+    {yomi:'プロテイン', text:'purotein'},
+    {yomi:'ください', text:'kudasai'},
     {yomi:'パソコン', text:'pasokon'},
-    {yomi:'けいたい', text:'keitai'},
-    {yomi:'ふとん', text:'futon'},
+    {yomi:'せいちょう', text:'seityou'},
+    {yomi:'エンジニア', text:'ennginia'},
   ];
   
+  $yomi.hide();
+  $mondai.hide();
   changeQuestionWord(getQuestionNumber());//最初の問題の設定
 
   $countSelect.on('change', function(e) {
@@ -49,9 +52,17 @@ $(function() {
 
   // MONDAI_LIST[0]['yomi'] = ごはん、 MONDAI_LIST[1]['yomi'] = おすし。です
 
+  $('#start-button').on('click', function(e) {
+    init();
+  });
+
   $(document).on('keypress', function(e) {
     // console.log('key:' + e.key);
     if(!start_game && e.keyCode === 32) {
+      $startMessage.hide();
+      $countSelect.hide();
+      $yomi.show();
+      $mondai.show();
       start_game = true;
       start_time = performance.now();
       return;
@@ -95,6 +106,27 @@ $(function() {
     // const random_number = Math.floor(Math.random() * 10);
     return random_number;
   }
+  
+  function init() {
+    char_index = 1;
+    question_number = 1;
+    question_limit = 3;
+    done_questions = {};
+    typing_cnt = 0;
+    correct_cnt = 0;
+    mistake_cnt = 0;
+    start_game = false;
+    start_time = 0;
+    $countSelect.val('3');
+
+    changeQuestionWord(getQuestionNumber());
+
+    $finishPanel.addClass('hidden');
+    $yomi.hide();
+    $mondai.hide();
+    $startMessage.show();
+    $countSelect.show();
+  }
 
   function finish() {
     $finishPanel.removeClass('hidden');
@@ -107,6 +139,7 @@ $(function() {
     $timeMessage.text('かかった時間:' + typing_time + '秒');
     // alert('問題終了！');
   }
+
 
   function changeQuestionWord(index) {
     const word = MONDAI_LIST[index]['text'];
